@@ -29,6 +29,11 @@ io.on("connection", (socket) => {
     socket.on("sendMSG", (msg) => {
         io.emit("msgUpdate", msg)
     })
+
+    socket.on("joinRoom", (roomName) => {
+      socket.join(roomName)
+      socket.to(roomName).emit("alert", roomName)
+    })
 });
 
 io.engine.on("connection_error", (err) => {

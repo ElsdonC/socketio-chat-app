@@ -26,3 +26,16 @@ socket.on("msgUpdate", (msg) => {
     console.log("Message:", msg)
     document.querySelector(".chatbox").innerHTML += `<p>${msg}</p>`
 })
+
+// Event listener for joining rooms
+document.querySelector("#joinBtn").addEventListener("click", () => {
+  if (document.querySelector("#roomName").value.length != 0) {
+    socket.emit("joinRoom", document.querySelector("#roomName").value)
+  }
+  document.querySelector("#roomName").value = ""
+})
+
+socket.on("alert", (message) => {
+  console.log(message)
+  alert(message)
+})
